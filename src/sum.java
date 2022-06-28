@@ -6,7 +6,7 @@ public class sum {
 	public static void main(String[] args) {
 		System.out.println("두 수를 입력하새요.");
 		
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in); //키보드 = System.in
 
 	    String inputValue = sc.nextLine();
 	    String[] splitedValue = inputValue.split(" ");
