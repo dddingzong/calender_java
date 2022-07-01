@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class calender4 {
 	public static void main(String[] args) {
 		
+		String PROMPT = "calender> ";
 		int[] date = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 		
 		System.out.println("반복횟수를 입력하세요.");
@@ -11,6 +12,7 @@ public class calender4 {
 		
 		for (int i = 0; i < iter; i++) {
 			System.out.println("월을 입력하세요.");
+			System.out.print(PROMPT);
 			int month = sc.nextInt();
 			
 			if (month == -1) {
