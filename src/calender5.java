@@ -3,15 +3,17 @@ import java.util.Scanner;
 public class calender5 {
 	public static void main(String[] args) {
 
-		String PROMPT = "> ";
 		Scanner sc = new Scanner(System.in);
-		int year = 2022;
 		while (true) {
+			System.out.println("년을 입력하세요.");
+			System.out.print("YEAR> ");
+			int year = sc.nextInt();
+			
 			System.out.println("월을 입력하세요.");
-			System.out.print(PROMPT);
+			System.out.print("MONTH> ");
 			int month = sc.nextInt();
 
-			if (month == -1) {
+			if (month == -1 | year == -1) {
 				System.out.println("Bye~");
 				break;
 			} else if (month > 12) {
@@ -28,6 +30,8 @@ public class calender5 {
 					System.out.println("29 30 31");
 				} else if (month == 4 | month == 6 | month == 9 | month == 11) {
 					System.out.println("29 30");
+				} else if (month == 2 & year % 4 == 0 & (year % 100 != 0 | year % 400 == 0)) {
+					System.out.println("29");
 				}
 			}
 
