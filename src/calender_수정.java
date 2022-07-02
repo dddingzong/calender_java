@@ -30,7 +30,7 @@ public class calender_수정 {
 		
 		int index = startpoint(weekday);
 		
-		System.out.printf("   %4d 년 %3d 월\n", year, month);
+		System.out.printf("   %d 년 %d 월\n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("--------------------");
 

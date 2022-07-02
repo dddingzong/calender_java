@@ -18,12 +18,13 @@ public class Prompt {
 			System.out.print("WEEKDAY> ");
 			String weekday = sc.next();
 			
-			if (month == -1) {
+			if (year == -1) {
 				System.out.println("Bye~");
 				break;
 			}
 			
-			if (month > 12) {
+			if (month > 12 | month < 1) {
+				System.err.println("오류입니다.");
 				continue;
 			}
 			
