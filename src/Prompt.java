@@ -14,6 +14,9 @@ public class Prompt {
 			System.out.println("월을 입력하세요");
 			System.out.print("MONTH> ");
 			int month = sc.nextInt();
+			System.out.println("첫번쨰 요일을 입력하세요. (SU, MO, TU, WE, TH, FR, SA)");
+			System.out.print("WEEKDAY> ");
+			String weekday = sc.next();
 			
 			if (month == -1) {
 				System.out.println("Bye~");
@@ -24,7 +27,7 @@ public class Prompt {
 				continue;
 			}
 			
-			cal.printcalender(year,month);
+			cal.printcalender(year,month,weekday);
 		}
 	}
 	

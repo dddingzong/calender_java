@@ -1,7 +1,14 @@
+import java.util.Arrays;
+
 public class calender_수정 {
 	
 	private static final int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_MAX_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	private static final String[] WEEKDAYS_ARRAY = {"SU", "MO","TU", "WE", "TH", "FR", "SA"};
+	
+	public int startpoint(String weekday) {
+		return Arrays.asList(WEEKDAYS_ARRAY).indexOf(weekday);
+	}
 
 	public boolean isLEAPYEAR(int year) {
 		if (year % 4 ==0 & (year % 100 != 0 | year % 400 == 0)) { 
@@ -19,16 +26,24 @@ public class calender_수정 {
 		} 
 	}
 
-	public void printcalender(int year, int month) {
+	public void printcalender(int year, int month, String weekday) {
+		
+		int index = startpoint(weekday);
+		
 		System.out.printf("   %4d 년 %3d 월\n", year, month);
-		System.out.println("SU MO TU WE TH FR SA");
+		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("--------------------");
 
 		int maxDay = getMaxdaysofmonth(year, month);
-
-		for (int i = 1; i <= maxDay; i++) {
-			System.out.printf("%3d", i);
-			if (i % 7 == 0) {
+		
+		for (int j = 1; j <= index; j++) {
+			System.out.printf("%3s", " ");
+		}
+		
+		for (int i = 1 + index ; i <= maxDay + index; i++) {
+			
+			System.out.printf("%3d", i - index);
+			if (i  % 7 == 0) {
 				System.out.println("");
 			}
 		}
