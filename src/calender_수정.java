@@ -36,17 +36,18 @@ public class calender_수정 {
 
 		int maxDay = getMaxdaysofmonth(year, month);
 		
+		//print blank
 		for (int j = 1; j <= index; j++) {
 			System.out.printf("%3s", " ");
 		}
 		
 		for (int i = 1 + index ; i <= maxDay + index; i++) {
-			
 			System.out.printf("%3d", i - index);
 			if (i  % 7 == 0) {
 				System.out.println("");
 			}
 		}
+		System.out.println();
 		System.out.println();
 
 //		System.out.println(" 1  2  3  4  5  6  7");

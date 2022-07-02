@@ -29,6 +29,8 @@ public class Prompt {
 			
 			cal.printcalender(year,month,weekday);
 		}
+		
+		sc.close();
 	}
 	
 	
