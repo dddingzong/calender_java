@@ -4,32 +4,29 @@ public class calender_수정 {
 	private static final int[] LEAP_MAX_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	// 해당 년도의 1월 1일의 요일 찾기
-	
+
 	int sum = 0;
 	int startYear = 0;
-	
+
 	public int FindweekYear(int year) {
-		
 		sum = 0;
 		startYear = 0;
-
 		for (int i = 1583; i < year; i++) {
-			if (i % 4 == 0 & (i % 100 != 0 | i % 400 == 0)) {
+			if (isLEAPYEAR(i)) {
 				sum = sum + 2;
 			} else {
 				sum = sum + 1;
 			}
-		}	
+		}
 		return (sum + 6) % 7; // 해당 월의 1월 1일 요일
 	}
-	
-	
+
 	// 해당 월의 시작 요일 찾기
 	public int FindweekMonth(int year, int month) {
 		int[] weekMonth = new int[12];
 		weekMonth[0] = startYear;
 
-		if (year % 4 == 0 & (year % 100 != 0 | year % 400 == 0)) {
+		if (isLEAPYEAR(year)) {
 			for (int j = 1; j <= month - 1; j++) {
 				weekMonth[j] = (weekMonth[j - 1] + LEAP_MAX_DAYS[j - 1] % 7) % 7;
 			}
@@ -64,10 +61,10 @@ public class calender_수정 {
 		System.out.println("--------------------");
 
 		int maxDay = getMaxdaysofmonth(year, month);
-		
+
 		startYear = FindweekYear(year);
-		int index = FindweekMonth(year,month);
-		
+		int index = FindweekMonth(year, month);
+
 		// print blank
 		for (int j = 1; j <= index; j++) {
 			System.out.printf("%3s", " ");
