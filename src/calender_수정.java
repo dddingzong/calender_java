@@ -38,6 +38,7 @@ public class calender_수정 {
 		return weekMonth[month - 1]; // 해당 월의 시작 요일
 	}
 
+	// 운년 계산
 	public boolean isLEAPYEAR(int year) {
 		if (year % 4 == 0 & (year % 100 != 0 | year % 400 == 0)) {
 			return true;
@@ -45,7 +46,8 @@ public class calender_수정 {
 			return false;
 		}
 	}
-
+	
+	// 각 달의 최대 일
 	public int getMaxdaysofmonth(int year, int month) {
 		if (isLEAPYEAR(year)) {
 			return LEAP_MAX_DAYS[(month - 1)];
@@ -54,11 +56,12 @@ public class calender_수정 {
 		}
 	}
 
+	// 메인 메소드
 	public void printcalender(int year, int month) {
 
 		System.out.printf("     %d 년 %d 월\n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
-		System.out.println("--------------------");
+		System.out.println("---------------------");
 
 		int maxDay = getMaxdaysofmonth(year, month);
 
