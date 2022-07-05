@@ -41,7 +41,6 @@ public class Prompt {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		ArrayList<String> work = new ArrayList<String>(); // 타입 생략 가능
 		HashMap<String, ArrayList<String>> workspace = new HashMap<String, ArrayList<String>>(); // HashMap생성
 		boolean flag = true;
 
@@ -65,26 +64,28 @@ public class Prompt {
 				String date = "default";
 				date = sc.next();
 				
+				if (workspace.containsKey(date) == false) {
+					ArrayList<String> work = new ArrayList<String>(); 
+					workspace.put(date, work); // workspace hashmap에 arrayList 추가
+				}
+				
 				String work_list = "";
 				sc.nextLine(); // ignore one newLine
 				System.out.println("일정을 입력하세요.");
 				System.out.print("> ");
 				work_list = sc.nextLine(); // 일정 받기
+					
 				
-
-				// work 중복만 해결하면됨
-
-//				if (workspace.containsKey(date) == false) {
-//					work.add(work_list);
-//					workspace.put(date, work); // workspace hashmap에 arrayList 추가
-//					System.out.println(workspace);
-//				} else {// 만약 일정이 이미 존재한다면?
-//					workspace.get(date).add(work_list); // 일정을 ArrayList에 추가
-//				}
+				ArrayList<String> existList = workspace.get(date);
 				
-				work.add(work_list);
-				workspace.put(date, work);
+				existList.add(work_list); // 일정을 ArrayList에 추가
+				workspace.put(date, existList);
 				System.out.println(workspace);
+				
+				
+//				work.add(work_list);
+//				workspace.put(date, work);
+//				System.out.println(workspace);
 				
 				
 				System.out.println("일정을 등록되었습니다.");
@@ -134,5 +135,4 @@ public class Prompt {
 		}
 		sc.close();
 	}
-
 }
