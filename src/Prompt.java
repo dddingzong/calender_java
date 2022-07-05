@@ -57,7 +57,7 @@ public class Prompt {
 			System.out.println("명령을 입력하세요.");
 			System.out.print("> ");
 			String number = sc.next();
-			
+
 			// 1번 입력
 			if (number.equals("1")) {
 				System.out.println("[일정 등록] 날짜를 입력하세요.");
@@ -65,32 +65,36 @@ public class Prompt {
 				String date = "default";
 				date = sc.next();
 				
+				String work_list = "";
+				sc.nextLine(); // ignore one newLine
 				System.out.println("일정을 입력하세요.");
 				System.out.print("> ");
+				work_list = sc.nextLine(); // 일정 받기
+				
 
-				String work_list = sc.next(); // 일정 받기
+				// work 중복만 해결하면됨
+
+//				if (workspace.containsKey(date) == false) {
+//					work.add(work_list);
+//					workspace.put(date, work); // workspace hashmap에 arrayList 추가
+//					System.out.println(workspace);
+//				} else {// 만약 일정이 이미 존재한다면?
+//					workspace.get(date).add(work_list); // 일정을 ArrayList에 추가
+//				}
 				
-				//work 중복만 해결하면됨
+				work.add(work_list);
+				workspace.put(date, work);
+				System.out.println(workspace);
 				
-				if (workspace.containsKey(date) == false) {
-					work.add(work_list);
-					
-					
-					workspace.put(date, work); // workspace hashmap에 arrayList 추가
-					
-					
-					System.out.println(workspace);
-				} else {// 만약 일정이 이미 존재한다면?
-					workspace.get(date).add(work_list); // 일정을 ArrayList에 추가
-				}
+				
 				System.out.println("일정을 등록되었습니다.");
-				
+
 			} else if (number.equals("2")) {
 				System.out.println("[일정 검색] 날짜를 입력하세요.");
 				System.out.print("> ");
 				String date_search = sc.next(); // 조회 날짜 정하기
 
-				if (workspace.containsKey(date_search)==false) {
+				if (workspace.containsKey(date_search) == false) {
 					System.out.println("일정이 비어있습니다.");
 				} else {
 					System.out.println(workspace.get(date_search).size() + "개의 일정이 있습니다.");
@@ -100,11 +104,11 @@ public class Prompt {
 				}
 			} else if (number.equals("3")) {
 				calender_수정 cal = new calender_수정();
-				
+
 				System.out.println("년도를 입력하세요");
 				System.out.print("YEAR> ");
 				int year = sc.nextInt();
-				
+
 				System.out.println("월을 입력하세요");
 				System.out.print("MONTH> ");
 				int month = sc.nextInt();
@@ -112,9 +116,9 @@ public class Prompt {
 				if (month > 12 | month < 1) {
 					System.err.println("오류입니다.");
 				} else {
-				cal.printcalender(year, month);
+					cal.printcalender(year, month);
 				}
-				
+
 			} else if (number.equals("h")) {
 				System.out.println("+----------------------+");
 				System.out.println("| 1. 일정 등록");
@@ -122,7 +126,7 @@ public class Prompt {
 				System.out.println("| 3. 달력 보기");
 				System.out.println("| h. 도움말 q. 종료");
 				System.out.println("+----------------------+");
-			}else if (number.equals("q")) {
+			} else if (number.equals("q")) {
 				flag = false;
 				System.out.println("Bye~");
 			}
