@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,8 +44,57 @@ public class Prompt {
 
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		String date = "default";
+		String work_list;
+		ArrayList<String> existList = new ArrayList<String>();
 		HashMap<String, ArrayList<String>> workspace = new HashMap<String, ArrayList<String>>(); // HashMap생성
+
+		// I/O 관리
+		String Save_file = "calender.dat";
+		File f = new File(Save_file);
+		// 파일 불러오기
+		if (!f.exists()) {
+			System.err.println("일정이 없습니다.");
+		} else {
+			try {
+				Scanner s = new Scanner(f);
+				while (s.hasNext()) {
+					String line = s.nextLine();
+					// System.out.println(line);
+					String[] words = line.split(",");
+					date = words[0];
+
+					if (workspace.containsKey(date) == false) {
+						ArrayList<String> work = new ArrayList<String>();
+						workspace.put(date, work); // workspace hashmap에 arrayList 추가
+					}
+
+					int step = workspace.get(date).size();
+					
+					if (step == 0) {
+						work_list = words[1 + step];
+						work_list = work_list.replaceAll("]","");
+						work_list = work_list.replaceAll("\\[","");
+					} else {
+						work_list = words[1 + step].replaceAll("]",""); 
+					}
+					
+					// System.out.println(work_list);
+					existList = workspace.get(date);
+					existList.add(work_list); // 일정을 ArrayList에 추가
+
+					// workspace.put(date, existList);
+
+					// System.out.println(workspace);
+
+				}
+				s.close();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+		Scanner sc = new Scanner(System.in);
 		boolean flag = true;
 
 		System.out.println("+----------------------+");
@@ -61,34 +114,35 @@ public class Prompt {
 			if (number.equals("1")) {
 				System.out.println("[일정 등록] 날짜를 입력하세요.");
 				System.out.print("> ");
-				String date = "default";
 				date = sc.next();
-				
+
 				if (workspace.containsKey(date) == false) {
-					ArrayList<String> work = new ArrayList<String>(); 
-					workspace.put(date, work); // workspace hashmap에 arrayList 추가
+					ArrayList<String> EmptyList = new ArrayList<String>();
+					workspace.put(date, EmptyList); // workspace hashmap에 arrayList 추가
 				}
-				
-				String work_list = "";
+
 				sc.nextLine(); // ignore one newLine
 				System.out.println("일정을 입력하세요.");
 				System.out.print("> ");
 				work_list = sc.nextLine(); // 일정 받기
-					
-				
-				ArrayList<String> existList = workspace.get(date);
-				
+
+				existList = workspace.get(date);
+
 				existList.add(work_list); // 일정을 ArrayList에 추가
 				workspace.put(date, existList);
-				System.out.println(workspace);
-				
-				
-//				work.add(work_list);
-//				workspace.put(date, work);
-//				System.out.println(workspace);
-				
-				
 				System.out.println("일정을 등록되었습니다.");
+
+				// I/O 시도
+				try {
+					FileWriter fw = new FileWriter(f, true);
+
+					String shortword = date + "," + existList + "\n";
+					fw.write(shortword);
+					fw.close();
+					//System.out.println(date + ":" + existList);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 			} else if (number.equals("2")) {
 				System.out.println("[일정 검색] 날짜를 입력하세요.");
